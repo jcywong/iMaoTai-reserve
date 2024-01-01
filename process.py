@@ -1,9 +1,9 @@
 import datetime
 import json
 import math
-import os
+# import os
 import random
-import re
+# import re
 import time
 import config
 from encrypt import Encrypt
@@ -41,7 +41,6 @@ mt_version = get_mt_version()
 '''
 # 通过ios应用商店的api获取最新版本
 mt_version = json.loads(requests.get('https://itunes.apple.com/cn/lookup?id=1600482450').text)['results'][0]['version']
-
 
 header_context = f'''
 MT-Lat: 28.499562
@@ -243,14 +242,14 @@ def act_params(shop_id: str, item_id: str):
 
 
 # 消息推送
-def send_msg(title, content):
-    if config.PUSH_TOKEN is None:
-        return
-    url = 'http://www.pushplus.plus/send'
-    r = requests.get(url, params={'token': config.PUSH_TOKEN,
-                                  'title': title,
-                                  'content': content})
-    logging.info(f'通知推送结果：{r.status_code, r.text}')
+# def send_msg(title, content):
+#     if config.PUSH_TOKEN is None:
+#         return
+#     url = 'http://www.pushplus.plus/send'
+#     r = requests.get(url, params={'token': config.PUSH_TOKEN,
+#                                   'title': title,
+#                                   'content': content})
+#     logging.info(f'通知推送结果：{r.status_code, r.text}')
 
 
 # 核心代码，执行预约

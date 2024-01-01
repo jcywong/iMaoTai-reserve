@@ -1,11 +1,11 @@
 import datetime
 import logging
+import os
 import sys
+import configparser
 
 import config
-import login
 import process
-import privateCrypt
 
 DATE_FORMAT = "%m/%d/%Y %H:%M:%S %p"
 TODAY = datetime.date.today().strftime("%Y%m%d")
@@ -25,24 +25,62 @@ print(r'''
 process.get_current_session_id()
 
 # 校验配置文件是否存在
-configs = login.config
+# configs = login.config
+configs = configparser.ConfigParser()
+# 这里config需要用encoding，以防跨平台乱码
+configs.read('./credentials', encoding="utf-8")
 if len(configs.sections()) == 0:
     logging.error("配置文件未找到配置")
     sys.exit(1)
 
-aes_key = privateCrypt.get_aes_key()
+# aes_key = privateCrypt.get_aes_key()
 
 s_title = '茅台预约成功'
 s_content = ""
 
+user_list = []
+
+
+def get_users():
+    try:
+        if "mao_user" in os.environ:
+            global user_list
+            users = os.environ["mao_user"]
+            print(users)
+            user_list = users.split('&')
+    except Exception as e:
+        print(e)
+
+
+def get_user_info():
+    user_info = []
+    get_users()
+    if len(user_list) != 0:
+        # user : mobile=xxx, token=xxx, userid=xxx
+        for user in user_list:
+            info = user.split(',')
+            mobile = info[0].split('=')[1].replace(' ', '')
+            token = info[1].split('=')[1].replace(' ', '')
+            userid = info[2].split('=')[1].replace(' ', '')
+
+            print(f"mobile:{mobile},token:{token},userid:{userid}")
+            user_info.append([mobile, token, userid])
+
+        return user_info
+    else:
+        return None
+
+
 for section in configs.sections():
-    if (configs.get(section, 'enddate') != 9) and (TODAY > configs.get(section, 'enddate')):
-        continue
-    mobile = privateCrypt.decrypt_aes_ecb(section, aes_key)
+    # if (configs.get(section, 'enddate') != 9) and (TODAY > configs.get(section, 'enddate')):
+    #     continue
+    # mobile = privateCrypt.decrypt_aes_ecb(section, aes_key)
+    mobile, token, userId = get_user_info()
     province = configs.get(section, 'province')
     city = configs.get(section, 'city')
-    token = configs.get(section, 'token')
-    userId = privateCrypt.decrypt_aes_ecb(configs.get(section, 'userid'), aes_key)
+    # token = configs.get(section, 'token')
+    # userId = privateCrypt.decrypt_aes_ecb(configs.get(section, 'userid'), aes_key)
+    # userId = configs.get(section, 'userid')
     lat = configs.get(section, 'lat')
     lng = configs.get(section, 'lng')
 
@@ -82,4 +120,4 @@ for section in configs.sections():
         logging.error(e)
 
 # 推送消息
-process.send_msg(s_title, s_content)
+# process.send_msg(s_title, s_content)
