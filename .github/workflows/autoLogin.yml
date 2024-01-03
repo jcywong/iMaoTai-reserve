@@ -8,8 +8,8 @@ on:
     branches: [ "master" ]
     paths:
       - '.github/workflows/**'
-  schedule:
-    - cron: '20 0,1 * * *'
+#  schedule:
+#    - cron: '20 0,1 * * *'
 
 env:
   TZ: Asia/Shanghai
@@ -44,11 +44,11 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: start run
-        env:
-          PUSHPLUS_KEY: ${{ secrets.PUSHPLUS_KEY }}
-          PRIVATE_AES_KEY: ${{ secrets.PRIVATE_AES_KEY }}
+#        env:
+#          PUSHPLUS_KEY: ${{ secrets.PUSHPLUS_KEY }}
+#          PRIVATE_AES_KEY: ${{ secrets.PRIVATE_AES_KEY }}
         run: |
-          python main.py
+          python login.py
 
 #        pip install flake8 pytest
 #        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
