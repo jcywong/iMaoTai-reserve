@@ -2,7 +2,6 @@ import configparser
 import os
 import config as cf
 import process
-import privateCrypt
 
 config = configparser.ConfigParser()  # 类实例化
 
@@ -48,7 +47,6 @@ def get_location():
 
 if __name__ == '__main__':
 
-    # aes_key = privateCrypt.get_aes_key()
 
     while 1:
         process.init_headers()
@@ -62,25 +60,20 @@ if __name__ == '__main__':
         code = input(f"输入 [{mobile}] 验证码[1234]:").strip()
         token, userId = process.login(mobile, code)
 
-        # endDate = input(f"输入 [{mobile}] 截止日期(必须是YYYYMMDD,20230819)，如果不设置截止，请输入9：").strip()
+        info = f"mobile={mobile},userid={userId},token={token},province={province},city={city},lat={location.split(',')[1]},lng={location.split(',')[0]}"
 
-        # 为了增加辨识度，这里做了隐私处理，不参与任何业务逻辑
-        # hide_mobile = mobile.replace(mobile[3:7], '****')
-        # 因为加密了手机号和Userid，所以token就不做加密了
-        # encrypt_mobile = privateCrypt.encrypt_aes_ecb(mobile, aes_key)
-        # encrypt_userid = privateCrypt.encrypt_aes_ecb(str(userId), aes_key)
+        # 打印复制
+        print(f"复制以下内容，以备后续使用\n{info}\n")
 
+        # 保存数据credentials
         if mobile not in sections:
             config.add_section(mobile)  # 首先添加一个新的section
 
-        # config.set(mobile, 'hidemobile', hide_mobile)
-        # config.set(encrypt_mobile, 'enddate', endDate)
         config.set(mobile, 'mobile', mobile)
         config.set(mobile, 'userid', str(userId))
+        config.set(mobile, 'token', str(token))
         config.set(mobile, 'province', str(province))
         config.set(mobile, 'city', str(city))
-        config.set(mobile, 'token', str(token))
-
         config.set(mobile, 'lat', location.split(',')[1])
         config.set(mobile, 'lng', location.split(',')[0])
 
