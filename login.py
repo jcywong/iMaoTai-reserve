@@ -1,27 +1,27 @@
-import configparser
-import os
-import config as cf
+# import configparser
+# import os
+# import config as cf
 import process
 
-config = configparser.ConfigParser()  # 类实例化
+# config = configparser.ConfigParser()  # 类实例化
 
 
-def get_credentials_path():
-    if cf.CREDENTIALS_PATH is not None:
-        return cf.CREDENTIALS_PATH
-    else:
-        home_path = os.getcwd()
-        config_parent_path = os.path.join(home_path, 'myConfig')
-        config_path = os.path.join(config_parent_path, 'credentials')
-        if not os.path.exists(config_parent_path):
-            os.mkdir(config_parent_path)
-        return config_path
-
-
-path = get_credentials_path()
-# 这里config需要用encoding，以防跨平台乱码
-config.read(path, encoding="utf-8")
-sections = config.sections()
+# def get_credentials_path():
+#     if cf.CREDENTIALS_PATH is not None:
+#         return cf.CREDENTIALS_PATH
+#     else:
+#         home_path = os.getcwd()
+#         config_parent_path = os.path.join(home_path, 'myConfig')
+#         config_path = os.path.join(config_parent_path, 'credentials')
+#         if not os.path.exists(config_parent_path):
+#             os.mkdir(config_parent_path)
+#         return config_path
+#
+#
+# path = get_credentials_path()
+# # 这里config需要用encoding，以防跨平台乱码
+# config.read(path, encoding="utf-8")
+# sections = config.sections()
 
 
 def get_location():
@@ -65,19 +65,19 @@ if __name__ == '__main__':
         # 打印复制
         print(f"复制以下内容，以备后续使用\n{info}\n")
 
-        # 保存数据credentials
-        if mobile not in sections:
-            config.add_section(mobile)  # 首先添加一个新的section
-
-        config.set(mobile, 'mobile', mobile)
-        config.set(mobile, 'userid', str(userId))
-        config.set(mobile, 'token', str(token))
-        config.set(mobile, 'province', str(province))
-        config.set(mobile, 'city', str(city))
-        config.set(mobile, 'lat', location.split(',')[1])
-        config.set(mobile, 'lng', location.split(',')[0])
-
-        config.write(open(path, 'w+', encoding="utf-8"))  # 保存数据
+        # # 保存数据credentials
+        # if mobile not in sections:
+        #     config.add_section(mobile)  # 首先添加一个新的section
+        #
+        # config.set(mobile, 'mobile', mobile)
+        # config.set(mobile, 'userid', str(userId))
+        # config.set(mobile, 'token', str(token))
+        # config.set(mobile, 'province', str(province))
+        # config.set(mobile, 'city', str(city))
+        # config.set(mobile, 'lat', location.split(',')[1])
+        # config.set(mobile, 'lng', location.split(',')[0])
+        #
+        # config.write(open(path, 'w+', encoding="utf-8"))  # 保存数据
 
         condition = input(f"是否继续添加账号[y/n]:").strip()
 
