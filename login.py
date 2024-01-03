@@ -67,7 +67,7 @@ if __name__ == '__main__':
 
         # 保存数据credentials
         if mobile not in sections:
-            config.add_section(mobile)  # 首先添加一个新的section
+            config.add_section(mobile)
 
         config.set(mobile, 'mobile', mobile)
         config.set(mobile, 'userid', str(userId))
