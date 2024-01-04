@@ -56,6 +56,7 @@ if len(users_list) == 0:
         sys.exit(1)
 
 for user in users_list:
+    print(f"当前用户信息：{user}")
     mobile = user["mobile"]
     token = user["token"]
     userId = user["userId"]
