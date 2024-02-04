@@ -63,7 +63,7 @@ if __name__ == '__main__':
         info = f"mobile={mobile},userid={userId},token={token},province={province},city={city},lat={location.split(',')[1]},lng={location.split(',')[0]}"
 
         # 打印复制
-        print(f"复制以下内容，以备后续使用\n{info}\n")
+        print(f"复制以下内容，以备后续使用\n{info}")
 
         # 保存数据credentials
         if mobile not in sections:
