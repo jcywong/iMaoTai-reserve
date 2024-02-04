@@ -35,7 +35,7 @@ pip3 install --no-cache-dir -r requirements.txt
 python3 login.py
 # 都选择完之后可以去./myConfig/credentials中查看
 ```
-2. 获取”复制以下内容，以备后续使用“后的内容，去青龙平台添加环境变量mao_user，值为刚才复制的内容。
+2. 获取”复制以下内容，以备后续使用“后的内容，去青龙平台添加环境变量`mao_user`，值为刚才复制的内容。
 3. 继续添加账号
 
 
@@ -44,6 +44,6 @@ python3 login.py
 ```shell
 ql repo https://github.com/jcywong/iMaoTai-reserve.git
 ```
-2. 青龙平台添加环境变量mao_user，值为本地生成的内容**（内容需要去掉回车）**
+2. 青龙平台添加环境变量`mao_user`，值为本地生成的内容**（内容需要去掉回车）**
 
-
+3. 保留main任务，删除其他任务，并修改main任务的定时规则为 `0 50 9 * * *`
