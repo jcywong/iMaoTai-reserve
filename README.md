@@ -44,6 +44,7 @@ python3 login.py
 ```shell
 ql repo https://github.com/jcywong/iMaoTai-reserve.git
 ```
-2. 青龙平台添加环境变量`mao_user`，值为本地生成的内容**（内容需要去掉回车）**
+2. 依赖管理中选择python3 安装依赖pycryptodome
+3. 青龙平台添加环境变量`mao_user`，值为本地生成的内容**（内容需要去掉回车）**
 
-3. 保留main任务，删除其他任务，并修改main任务的定时规则为 `0 50 9 * * *`
+4. 保留main任务，删除其他任务，并修改main任务的定时规则为 `0 50 9 * * *`
