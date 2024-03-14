@@ -17,7 +17,7 @@ fork  https://github.com/397179459/iMaoTai-reserve
 ### 本地运行
 #### 1、下载项目
 ```shell
-git clone https://github.com/397179459/iMaoTai-reserve.git
+git clone https://github.com/jcywong/iMaoTai-reserve.git
 ```
 
 
